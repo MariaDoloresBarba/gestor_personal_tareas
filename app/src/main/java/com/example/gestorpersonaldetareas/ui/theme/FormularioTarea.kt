@@ -22,17 +22,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.gestorpersonaldetareas.model.Prioridad
+import com.example.gestorpersonaldetareas.model.Tarea
 
 @Composable
 fun FormularioTarea(
+    tareaInicial: Tarea? = null,
     onGuardar: (titulo: String, descripcion: String, prioridad: Prioridad) -> Unit,
     onCancelar: () -> Unit
 ) {
-    var titulo by rememberSaveable { mutableStateOf("") }
-    var descripcion by rememberSaveable { mutableStateOf("") }
-    var prioridad by rememberSaveable { mutableStateOf(Prioridad.MEDIA) }
-    var errorTitulo by rememberSaveable { mutableStateOf<String?>(null) }
-    var menuAbierto by remember { mutableStateOf(false) }
+    var titulo by rememberSaveable { mutableStateOf(tareaInicial?.titulo ?: "") }
+    var descripcion by rememberSaveable { mutableStateOf(tareaInicial?.descripcion ?: "") }
+    var prioridad by rememberSaveable { mutableStateOf(tareaInicial?.prioridad ?: Prioridad.MEDIA) }
+    // ... el resto (errorTitulo, menuAbierto y el Column) queda igual
 
     Column(
         modifier = Modifier
@@ -40,12 +41,13 @@ fun FormularioTarea(
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
+        var errorTitulo = null
         OutlinedTextField(
             value = titulo,
             onValueChange = { titulo = it },
             label = { Text("Título") },
             isError = errorTitulo != null,
-            supportingText = { errorTitulo?.let { Text(it) } },
+            supportingText = { errorTitulo },
             singleLine = true,
             modifier = Modifier.fillMaxWidth()
         )
@@ -58,9 +60,10 @@ fun FormularioTarea(
         )
 
         Box {
-            OutlinedButton(onClick = { menuAbierto = true }) {
+            OutlinedButton(onClick = { var menuAbierto = true }) {
                 Text("Prioridad: ${prioridad.name}")
             }
+            var menuAbierto = false
             DropdownMenu(
                 expanded = menuAbierto,
                 onDismissRequest = { menuAbierto = false }
@@ -80,7 +83,7 @@ fun FormularioTarea(
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             Button(onClick = {
                 val error = validarTitulo(titulo)
-                errorTitulo = error
+                errorTitulo = error as Nothing?
                 if (error == null) {
                     onGuardar(titulo.trim(), descripcion.trim(), prioridad)
                 }

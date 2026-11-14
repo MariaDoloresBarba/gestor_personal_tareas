@@ -24,7 +24,12 @@ fun ListaTareas(tareas: List<Tarea>) {
     } else {
         LazyColumn {
             items(tareas, key = { it.id }) { tarea ->
-                TarjetaTarea(tarea = tarea)
+                TarjetaTarea(
+                    tarea = tarea,
+                    onCompletadaChange = TODO(),
+                    onEditar = TODO(),
+                    onEliminar = TODO()
+                )
             }
         }
     }
@@ -45,4 +50,32 @@ fun ListaTareasPreview() {
 @Composable
 fun ListaTareasVaciaPreview() {
     ListaTareas(tareas = emptyList())
+}
+
+@Composable
+fun ListaTareas(
+    tareas: List<Tarea>,
+    onCompletadaChange: (Tarea, Boolean) -> Unit,
+    onEditar: (Tarea) -> Unit,
+    onEliminar: (Tarea) -> Unit
+) {
+    if (tareas.isEmpty()) {
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(text = "No hay tareas. ¡Añade la primera!")
+        }
+    } else {
+        LazyColumn {
+            items(tareas, key = { it.id }) { tarea ->
+                TarjetaTarea(
+                    tarea = tarea,
+                    onCompletadaChange = { nuevoValor -> onCompletadaChange(tarea, nuevoValor) },
+                    onEditar = { onEditar(tarea) },
+                    onEliminar = { onEliminar(tarea) }
+                )
+            }
+        }
+    }
 }
