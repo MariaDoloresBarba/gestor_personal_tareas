@@ -1,4 +1,4 @@
-package com.example.gestorpersonaldetareas.ui.theme
+package com.example.gestorpersonaldetareas.ui
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,50 +13,11 @@ import com.example.gestorpersonaldetareas.model.Prioridad
 import com.example.gestorpersonaldetareas.model.Tarea
 
 @Composable
-fun ListaTareas(tareas: List<Tarea>) {
-    if (tareas.isEmpty()) {
-        Box(
-            modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center
-        ) {
-            Text(text = "No hay tareas. ¡Añade la primera!")
-        }
-    } else {
-        LazyColumn {
-            items(tareas, key = { it.id }) { tarea ->
-                TarjetaTarea(
-                    tarea = tarea,
-                    onCompletadaChange = TODO(),
-                    onEditar = TODO(),
-                    onEliminar = TODO()
-                )
-            }
-        }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun ListaTareasPreview() {
-    val tareasDePrueba = listOf(
-        Tarea(id = 1, titulo = "Estudiar Kotlin", prioridad = Prioridad.ALTA),
-        Tarea(id = 2, titulo = "Hacer la compra"),
-        Tarea(id = 3, titulo = "Llamar al dentista", completada = true)
-    )
-    ListaTareas(tareas = tareasDePrueba)
-}
-
-@Preview(showBackground = true)
-@Composable
-fun ListaTareasVaciaPreview() {
-    ListaTareas(tareas = emptyList())
-}
-
-@Composable
 fun ListaTareas(
     tareas: List<Tarea>,
     onCompletadaChange: (Tarea, Boolean) -> Unit,
     onEditar: (Tarea) -> Unit,
+    onCompartir: (Tarea) -> Unit,
     onEliminar: (Tarea) -> Unit,
     modifier: Modifier = Modifier,
     mensajeVacio: String = "No hay tareas. ¡Añade la primera!"
@@ -75,9 +36,39 @@ fun ListaTareas(
                     tarea = tarea,
                     onCompletadaChange = { nuevoValor -> onCompletadaChange(tarea, nuevoValor) },
                     onEditar = { onEditar(tarea) },
+                    onCompartir = { onCompartir(tarea) },
                     onEliminar = { onEliminar(tarea) }
                 )
             }
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ListaTareasPreview() {
+    val tareasDePrueba = listOf(
+        Tarea(id = 1, titulo = "Estudiar Kotlin", prioridad = Prioridad.ALTA),
+        Tarea(id = 2, titulo = "Hacer la compra"),
+        Tarea(id = 3, titulo = "Llamar al dentista", completada = true)
+    )
+    ListaTareas(
+        tareas = tareasDePrueba,
+        onCompletadaChange = { _, _ -> },
+        onEditar = {},
+        onCompartir = {},
+        onEliminar = {}
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ListaTareasVaciaPreview() {
+    ListaTareas(
+        tareas = emptyList(),
+        onCompletadaChange = { _, _ -> },
+        onEditar = {},
+        onCompartir = {},
+        onEliminar = {}
+    )
 }

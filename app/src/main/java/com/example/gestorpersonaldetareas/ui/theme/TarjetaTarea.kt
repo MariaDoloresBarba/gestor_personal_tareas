@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.Card
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Icon
@@ -25,6 +26,7 @@ fun TarjetaTarea(
     tarea: Tarea,
     onCompletadaChange: (Boolean) -> Unit,
     onEditar: () -> Unit,
+    onCompartir: () -> Unit,
     onEliminar: () -> Unit
 ) {
     val estado = if (tarea.completada) "Completada" else "Pendiente"
@@ -49,6 +51,9 @@ fun TarjetaTarea(
             IconButton(onClick = onEditar) {
                 Icon(Icons.Default.Edit, contentDescription = "Editar tarea")
             }
+            IconButton(onClick = onCompartir) {
+                Icon(Icons.Default.Share, contentDescription = "Compartir tarea")
+            }
             IconButton(onClick = onEliminar) {
                 Icon(Icons.Default.Delete, contentDescription = "Eliminar tarea")
             }
@@ -63,6 +68,7 @@ fun TarjetaTareaPreview() {
         tarea = Tarea(titulo = "Estudiar Kotlin"),
         onCompletadaChange = {},
         onEditar = {},
+        onCompartir = {},
         onEliminar = {}
     )
 }

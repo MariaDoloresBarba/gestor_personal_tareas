@@ -1,5 +1,7 @@
-package com.example.gestorpersonaldetareas.ui.theme
+package com.example.gestorpersonaldetareas.ui
 
+import android.widget.Toast
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -32,9 +34,9 @@ import com.example.gestorpersonaldetareas.data.TareaDatabase
 import com.example.gestorpersonaldetareas.data.TareaRepository
 import com.example.gestorpersonaldetareas.model.Tarea
 import com.example.gestorpersonaldetareas.preferences.PreferenciasUsuario
+import com.example.gestorpersonaldetareas.ui.theme.FormularioTarea
+import com.example.gestorpersonaldetareas.ui.theme.compartirTarea
 import kotlinx.coroutines.launch
-import androidx.activity.compose.BackHandler
-
 
 @Composable
 fun AppTareas() {
@@ -53,9 +55,9 @@ fun AppTareas() {
     val tareasVisibles = if (soloPendientes) tareas.filter { !it.completada } else tareas
 
     var mostrandoFormulario by rememberSaveable { mutableStateOf(false) }
+    var mostrandoEjemplos by rememberSaveable { mutableStateOf(false) }
     var idEnEdicion by rememberSaveable { mutableStateOf<Int?>(null) }
     var tareaAEliminar by remember { mutableStateOf<Tarea?>(null) }
-    var mostrandoEjemplos by rememberSaveable { mutableStateOf(false) }
 
     Scaffold(
         floatingActionButton = {
@@ -149,6 +151,15 @@ fun AppTareas() {
                         onEditar = { tarea ->
                             idEnEdicion = tarea.id
                             mostrandoFormulario = true
+                        },
+                        onCompartir = { tarea ->
+                            if (!compartirTarea(context, tarea)) {
+                                Toast.makeText(
+                                    context,
+                                    "No hay ninguna aplicación compatible para compartir.",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }
                         },
                         onEliminar = { tarea -> tareaAEliminar = tarea },
                         modifier = Modifier.weight(1f)

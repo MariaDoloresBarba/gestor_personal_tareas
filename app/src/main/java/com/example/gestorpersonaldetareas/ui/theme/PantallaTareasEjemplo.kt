@@ -1,4 +1,4 @@
-package com.example.gestorpersonaldetareas.ui.theme
+package com.example.gestorpersonaldetareas.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
