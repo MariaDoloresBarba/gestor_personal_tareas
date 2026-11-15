@@ -121,11 +121,7 @@ Las dependencias se declaran en `gradle/libs.versions.toml` y `app/build.gradle.
 
 ## Capturas de pantalla
 
-![Captura 1](./Im%C3%A1genes/1.png)
-![Captura 2](./Im%C3%A1genes/2.png)
-![Captura 3](./Im%C3%A1genes/3.png)
-![Captura 4](./Im%C3%A1genes/4.png)
-![Captura 5](./Im%C3%A1genes/5.png)
+Están ubicadas en la carpeta Imágenes.
 
 ## Uso de la inteligencia artificial
 
