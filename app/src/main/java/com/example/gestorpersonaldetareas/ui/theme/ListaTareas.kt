@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.gestorpersonaldetareas.model.Prioridad
 import com.example.gestorpersonaldetareas.model.Tarea
+import com.example.gestorpersonaldetareas.ui.theme.TarjetaTarea
 
 @Composable
 fun ListaTareas(
