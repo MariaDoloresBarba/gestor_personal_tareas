@@ -33,6 +33,8 @@ import com.example.gestorpersonaldetareas.data.TareaRepository
 import com.example.gestorpersonaldetareas.model.Tarea
 import com.example.gestorpersonaldetareas.preferences.PreferenciasUsuario
 import kotlinx.coroutines.launch
+import androidx.activity.compose.BackHandler
+
 
 @Composable
 fun AppTareas() {
@@ -53,10 +55,11 @@ fun AppTareas() {
     var mostrandoFormulario by rememberSaveable { mutableStateOf(false) }
     var idEnEdicion by rememberSaveable { mutableStateOf<Int?>(null) }
     var tareaAEliminar by remember { mutableStateOf<Tarea?>(null) }
+    var mostrandoEjemplos by rememberSaveable { mutableStateOf(false) }
 
     Scaffold(
         floatingActionButton = {
-            if (!mostrandoFormulario) {
+            if (!mostrandoFormulario && !mostrandoEjemplos) {
                 FloatingActionButton(onClick = {
                     idEnEdicion = null
                     mostrandoFormulario = true
@@ -67,7 +70,10 @@ fun AppTareas() {
         }
     ) { padding ->
         Box(modifier = Modifier.padding(padding)) {
-            if (mostrandoFormulario) {
+            if (mostrandoEjemplos) {
+                BackHandler { mostrandoEjemplos = false }
+                PantallaTareasEjemplo(onVolver = { mostrandoEjemplos = false })
+            } else if (mostrandoFormulario) {
                 val tareaEnEdicion = tareas.find { it.id == idEnEdicion }
 
                 FormularioTarea(
@@ -105,6 +111,12 @@ fun AppTareas() {
                 }
             } else {
                 Column {
+                    TextButton(
+                        onClick = { mostrandoEjemplos = true },
+                        modifier = Modifier.padding(horizontal = 8.dp)
+                    ) {
+                        Text("Tareas de ejemplo (API)")
+                    }
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
