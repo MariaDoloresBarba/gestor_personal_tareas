@@ -121,11 +121,11 @@ Las dependencias se declaran en `gradle/libs.versions.toml` y `app/build.gradle.
 
 ## Capturas de pantalla
 
-![Captura 1](Imágenes/Captura%20de%20pantalla%202026-11-15%20a%20las%2018.49.03.png)
-![Captura 2](Imágenes/Captura%20de%20pantalla%202026-11-15%20a%20las%20XX.XX.XX.png)
-![Captura 3](Imágenes/Captura%20de%20pantalla%202026-11-15%20a%20las%20XX.XX.XX.png)
-![Captura 4](Imágenes/Captura%20de%20pantalla%202026-11-15%20a%20las%20XX.XX.XX.png)
-![Captura 5](Imágenes/Captura%20de%20pantalla%202026-11-15%20a%20las%20XX.XX.XX.png)
+<img src="./Imágenes/Captura de pantalla 2026-11-15 a las 18.25.49.png" width="300" />
+<img src="./Imágenes/Captura de pantalla 2026-11-15 a las 18.26.52.png" width="300" />
+<img src="./Imágenes/Captura de pantalla 2026-11-15 a las 18.27.23.png" width="300" />
+<img src="./Imágenes/Captura de pantalla 2026-11-15 a las 18.27.55.png" width="300" />
+<img src="./Imágenes/Captura de pantalla 2026-11-15 a las 18.28.03.png" width="300" />
 
 ## Uso de la inteligencia artificial
 
