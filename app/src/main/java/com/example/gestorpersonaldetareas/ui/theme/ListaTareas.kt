@@ -57,17 +57,19 @@ fun ListaTareas(
     tareas: List<Tarea>,
     onCompletadaChange: (Tarea, Boolean) -> Unit,
     onEditar: (Tarea) -> Unit,
-    onEliminar: (Tarea) -> Unit
+    onEliminar: (Tarea) -> Unit,
+    modifier: Modifier = Modifier,
+    mensajeVacio: String = "No hay tareas. ¡Añade la primera!"
 ) {
     if (tareas.isEmpty()) {
         Box(
-            modifier = Modifier.fillMaxSize(),
+            modifier = modifier.fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
-            Text(text = "No hay tareas. ¡Añade la primera!")
+            Text(text = mensajeVacio)
         }
     } else {
-        LazyColumn {
+        LazyColumn(modifier = modifier) {
             items(tareas, key = { it.id }) { tarea ->
                 TarjetaTarea(
                     tarea = tarea,
